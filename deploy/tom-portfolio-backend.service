@@ -1,0 +1,44 @@
+# ================================
+# systemd 服务配置：tom-portfolio-backend
+# ================================
+# 文件位置：/etc/systemd/system/tom-portfolio-backend.service
+#
+# 设计思路：
+# 1. 开机自启动
+# 2. 崩溃自动重启
+# 3. 环境变量从独立文件读取
+# 4. 日志输出到系统日志
+# ================================
+
+[Unit]
+Description=Tom Portfolio Backend API
+Documentation=https://github.com/bigtree-tree-ai/tom-portfolio
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/data/tom-portfolio/backend
+
+# 环境变量文件
+Environment="NODE_ENV=production"
+EnvironmentFile=/data/tom-portfolio/backend/.env
+
+# 启动命令
+ExecStart=/usr/bin/node /data/tom-portfolio/backend/server.js
+
+# 自动重启配置
+Restart=always
+RestartSec=10
+
+# 日志配置
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=tom-portfolio-backend
+
+# 安全配置
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

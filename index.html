@@ -287,6 +287,180 @@
         }
 
         /* ================================
+           联系表单区块 - 迭代 #2
+           设计思路：保持科技风格，简洁实用
+           ================================ */
+        .contact-section {
+            margin-top: var(--space-lg);
+            padding: var(--space-md);
+            border: 1px solid var(--color-accent);
+            border-radius: 8px;
+            background: rgba(0, 5, 16, 0.8);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.2), inset 0 0 20px rgba(0, 212, 255, 0.1);
+            animation: aboutAppear 1s ease-out 1.5s forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .section-title {
+            font-family: var(--font-mono);
+            font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+            color: var(--color-accent);
+            letter-spacing: 0.2em;
+            margin-bottom: var(--space-sm);
+            text-transform: uppercase;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+
+        .form-group {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--color-muted);
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .form-input,
+        .form-textarea {
+            background: rgba(0, 5, 16, 0.6);
+            border: 1px solid var(--color-muted);
+            border-radius: 4px;
+            padding: 0.75rem 1rem;
+            color: var(--color-text);
+            font-family: var(--font-display);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus {
+            border-color: var(--color-accent);
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+            background: rgba(0, 5, 16, 0.8);
+        }
+
+        .form-input::placeholder,
+        .form-textarea::placeholder {
+            color: var(--color-muted);
+            opacity: 0.6;
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 80px;
+            font-family: var(--font-display);
+        }
+
+        .error-message {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: #ff4d4d;
+            margin-top: 0.25rem;
+            min-height: 1rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .error-message.visible {
+            opacity: 1;
+        }
+
+        .char-count {
+            font-family: var(--font-mono);
+            font-size: 0.625rem;
+            color: var(--color-muted);
+            text-align: right;
+            margin-top: 0.25rem;
+        }
+
+        .submit-btn {
+            position: relative;
+            margin-top: var(--space-sm);
+            padding: 0.875rem 2rem;
+            background: transparent;
+            border: 1px solid var(--color-accent);
+            border-radius: 4px;
+            color: var(--color-accent);
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .submit-btn:hover:not(:disabled) {
+            background: var(--color-accent);
+            color: var(--color-bg);
+            box-shadow: 0 0 20px var(--color-accent), 0 0 40px var(--color-accent);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-loader {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid var(--color-accent);
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        .submit-btn:disabled .btn-loader {
+            border-color: var(--color-accent);
+            border-top-color: transparent;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .form-status {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            text-align: center;
+            padding: 0.75rem;
+            border-radius: 4px;
+            margin-top: var(--space-sm);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .form-status.visible {
+            opacity: 1;
+        }
+
+        .form-status.success {
+            background: rgba(0, 255, 100, 0.1);
+            border: 1px solid #00ff64;
+            color: #00ff64;
+        }
+
+        .form-status.error {
+            background: rgba(255, 77, 77, 0.1);
+            border: 1px solid #ff4d4d;
+            color: #ff4d4d;
+        }
+
+        /* ================================
            装饰性元素
            ================================ */
         .decorative-elements {
@@ -513,6 +687,71 @@
                         @more_than7
                     </a>
                 </section>
+
+                <!-- ================================
+                     联系表单区块 - 迭代 #2
+                     设计思路：保持科技风格，提供简洁的联系表单
+                     包含三个字段：邮箱、称呼、备注
+                     ================================ -->
+                <section class="contact-section">
+                    <h2 class="section-title">✦ 联系我</h2>
+                    <form id="contact-form" class="contact-form" novalidate>
+                        <!-- 邮箱输入 -->
+                        <div class="form-group">
+                            <label for="email" class="form-label">邮箱</label>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                class="form-input"
+                                placeholder="your@email.com"
+                                required
+                                autocomplete="email"
+                            >
+                            <span class="error-message" id="email-error"></span>
+                        </div>
+
+                        <!-- 称呼输入 -->
+                        <div class="form-group">
+                            <label for="name" class="form-label">怎么称呼</label>
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                class="form-input"
+                                placeholder="请输入您的称呼"
+                                maxlength="20"
+                                required
+                                autocomplete="name"
+                            >
+                            <span class="error-message" id="name-error"></span>
+                            <span class="char-count"><span id="char-count">0</span>/20</span>
+                        </div>
+
+                        <!-- 备注输入 -->
+                        <div class="form-group">
+                            <label for="message" class="form-label">备注</label>
+                            <textarea
+                                id="message"
+                                name="message"
+                                class="form-textarea"
+                                rows="4"
+                                placeholder="你还有什么想对我说的，请联系我"
+                                maxlength="500"
+                            ></textarea>
+                            <span class="error-message" id="message-error"></span>
+                        </div>
+
+                        <!-- 提交按钮 -->
+                        <button type="submit" class="submit-btn" id="submit-btn">
+                            <span class="btn-text">提交</span>
+                            <span class="btn-loader" style="display: none;"></span>
+                        </button>
+
+                        <!-- 状态消息 -->
+                        <div id="form-status" class="form-status"></div>
+                    </form>
+                </section>
             </main>
         </div>
     </div>
@@ -674,6 +913,184 @@
         if (window.innerWidth < 768) {
             particles = particles.slice(0, 30);
         }
+
+        // ================================
+        // 联系表单逻辑 - 迭代 #2
+        // 设计思路：
+        // 1. 客户端验证：邮箱格式、字符限制
+        // 2. 提交状态管理：加载中、成功、失败
+        // 3. 错误提示：清晰的错误信息
+        // ================================
+
+        (function() {
+            const form = document.getElementById('contact-form');
+            const submitBtn = document.getElementById('submit-btn');
+            const btnText = submitBtn.querySelector('.btn-text');
+            const btnLoader = submitBtn.querySelector('.btn-loader');
+            const formStatus = document.getElementById('form-status');
+
+            const emailInput = document.getElementById('email');
+            const nameInput = document.getElementById('name');
+            const messageInput = document.getElementById('message');
+            const charCount = document.getElementById('char-count');
+
+            const emailError = document.getElementById('email-error');
+            const nameError = document.getElementById('name-error');
+            const messageError = document.getElementById('message-error');
+
+            // API 端点（相对路径，通过 Nginx 代理）
+            const API_ENDPOINT = '/api/contact';
+
+            // ================================
+            // 工具函数：验证邮箱格式
+            // ================================
+            function isValidEmail(email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            }
+
+            // ================================
+            // 工具函数：显示/隐藏错误信息
+            // ================================
+            function showError(element, message) {
+                element.textContent = message;
+                element.classList.add('visible');
+            }
+
+            function hideError(element) {
+                element.textContent = '';
+                element.classList.remove('visible');
+            }
+
+            // ================================
+            // 工具函数：显示状态消息
+            // ================================
+            function showStatus(message, type = 'success') {
+                formStatus.textContent = message;
+                formStatus.className = `form-status visible ${type}`;
+            }
+
+            function hideStatus() {
+                formStatus.className = 'form-status';
+            }
+
+            // ================================
+            // 工具函数：设置提交按钮状态
+            // ================================
+            function setSubmitting(isSubmitting) {
+                submitBtn.disabled = isSubmitting;
+                if (isSubmitting) {
+                    btnText.style.display = 'none';
+                    btnLoader.style.display = 'inline-block';
+                } else {
+                    btnText.style.display = 'inline';
+                    btnLoader.style.display = 'none';
+                }
+            }
+
+            // ================================
+            // 实时字符计数
+            // ================================
+            nameInput.addEventListener('input', function() {
+                const length = this.value.length;
+                charCount.textContent = length;
+
+                if (length >= 20) {
+                    charCount.style.color = '#ff4d4d';
+                } else {
+                    charCount.style.color = 'var(--color-muted)';
+                }
+            });
+
+            // ================================
+            // 实时验证：输入时清除错误
+            // ================================
+            emailInput.addEventListener('input', () => hideError(emailError));
+            nameInput.addEventListener('input', () => hideError(nameError));
+            messageInput.addEventListener('input', () => hideError(messageError));
+
+            // ================================
+            // 表单提交处理
+            // ================================
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                hideStatus();
+
+                // ================================
+                // 客户端验证
+                // ================================
+                let hasError = false;
+
+                // 验证邮箱
+                if (!emailInput.value.trim()) {
+                    showError(emailError, '请输入邮箱地址');
+                    hasError = true;
+                } else if (!isValidEmail(emailInput.value.trim())) {
+                    showError(emailError, '请输入有效的邮箱地址');
+                    hasError = true;
+                }
+
+                // 验证称呼
+                if (!nameInput.value.trim()) {
+                    showError(nameError, '请输入您的称呼');
+                    hasError = true;
+                } else if (nameInput.value.trim().length > 20) {
+                    showError(nameError, '称呼不能超过20个字符');
+                    hasError = true;
+                }
+
+                if (hasError) {
+                    return;
+                }
+
+                // ================================
+                // 提交表单
+                // ================================
+                setSubmitting(true);
+
+                const formData = {
+                    email: emailInput.value.trim(),
+                    name: nameInput.value.trim(),
+                    message: messageInput.value.trim() || ''
+                };
+
+                try {
+                    const response = await fetch(API_ENDPOINT, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(formData)
+                    });
+
+                    const result = await response.json();
+
+                    if (result.success) {
+                        // 提交成功
+                        showStatus('提交成功，感谢您的留言！', 'success');
+                        form.reset();
+                        charCount.textContent = '0';
+                    } else {
+                        // 提交失败
+                        if (result.errors && result.errors.length > 0) {
+                            // 显示具体错误
+                            result.errors.forEach(err => {
+                                if (err.includes('邮箱')) showError(emailError, err);
+                                else if (err.includes('称呼')) showError(nameError, err);
+                                else showStatus(err, 'error');
+                            });
+                        } else {
+                            showStatus(result.error || '提交失败，请稍后重试', 'error');
+                        }
+                    }
+                } catch (error) {
+                    console.error('Form submission error:', error);
+                    showStatus('网络错误，请稍后重试', 'error');
+                } finally {
+                    setSubmitting(false);
+                }
+            });
+        })();
     </script>
 </body>
 </html>
