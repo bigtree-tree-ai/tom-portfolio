@@ -9,19 +9,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=Space+Mono&display=swap" rel="stylesheet">
     <style>
         /* ================================
-           设计思路：创建一个有机流动的数字空间
-           核心视觉：粒子系统跟随鼠标 + 呼吸动画
+           设计思路：创建科技感流动的数字空间
+           核心视觉：粒子系统跟随鼠标 + 呼吸动画 + 蓝黑配色
            设计理念：极简但有趣，让页面"活"起来
+           配色方案：深邃黑背景 + 电光蓝强调色（科技风格）
            ================================ */
 
         :root {
-            /* 色彩系统：温暖的陶土色系 + 深邃的墨蓝 */
-            --color-bg: #0a0e14;
-            --color-text: #f5e6d3;
-            --color-accent: #d4a574;
-            --color-accent-light: #e8c9a0;
-            --color-accent-dark: #8b6914;
-            --color-muted: #3d4a52;
+            /* 色彩系统：深邃黑背景 + 电光蓝强调色（科技风格） */
+            --color-bg: #000510;
+            --color-text: #e0f0ff;
+            --color-accent: #00d4ff;
+            --color-accent-light: #40e0ff;
+            --color-accent-dark: #0099cc;
+            --color-muted: #1a3a5c;
 
             /* 字体系统 */
             --font-display: 'Noto Serif SC', serif;
@@ -55,6 +56,27 @@
         }
 
         /* ================================
+           扫描线效果（科技感增强）
+           ================================ */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0, 212, 255, 0.03) 2px,
+                rgba(0, 212, 255, 0.03) 4px
+            );
+            pointer-events: none;
+            z-index: 9998;
+        }
+
+        /* ================================
            粒子画布背景
            ================================ */
         #particle-canvas {
@@ -80,6 +102,7 @@
             z-index: 9999;
             transition: transform 0.15s ease-out, opacity 0.15s ease-out;
             mix-blend-mode: difference;
+            box-shadow: 0 0 10px var(--color-accent), 0 0 20px var(--color-accent);
         }
 
         .cursor-dot {
@@ -90,11 +113,13 @@
             border-radius: 50%;
             pointer-events: none;
             z-index: 9999;
+            box-shadow: 0 0 8px var(--color-accent), 0 0 15px var(--color-accent);
         }
 
         .cursor.hover {
             transform: scale(2);
             background: var(--color-accent-light);
+            box-shadow: 0 0 15px var(--color-accent-light), 0 0 30px var(--color-accent-light);
         }
 
         /* ================================
@@ -134,7 +159,8 @@
             width: 100%;
             height: 100%;
             border: 1px solid var(--color-accent);
-            opacity: 0.3;
+            opacity: 0.5;
+            box-shadow: 0 0 10px var(--color-accent), inset 0 0 10px var(--color-accent);
         }
 
         .decorative-frame::before {
@@ -168,13 +194,14 @@
             animation: breathe 4s ease-in-out infinite, nameAppear 1.2s ease-out forwards;
             opacity: 0;
             transform: translateY(30px);
+            filter: drop-shadow(0 0 20px var(--color-accent));
         }
 
         /* ================================
            简介文字
            ================================ */
         .tagline-section {
-            margin-bottom: var(--space-lg);
+            margin-bottom: var(--space-md);
         }
 
         .tagline {
@@ -204,6 +231,59 @@
             transform: scaleX(0);
             transform-origin: right;
             animation: underlineReveal 0.8s ease-out 1.5s forwards;
+            box-shadow: 0 0 8px var(--color-accent);
+        }
+
+        /* ================================
+           关于本站 - 新增内容区块
+           设计思路：添加发光效果和科技感边框
+           ================================ */
+        .about-section {
+            margin-top: var(--space-lg);
+            padding: var(--space-md);
+            border: 1px solid var(--color-accent);
+            border-radius: 8px;
+            background: rgba(0, 5, 16, 0.8);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.2), inset 0 0 20px rgba(0, 212, 255, 0.1);
+            animation: aboutAppear 1s ease-out 1s forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .about-title {
+            font-family: var(--font-mono);
+            font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+            color: var(--color-accent);
+            letter-spacing: 0.2em;
+            margin-bottom: var(--space-sm);
+            text-transform: uppercase;
+        }
+
+        .about-content {
+            font-size: clamp(0.875rem, 2vw, 1rem);
+            line-height: 1.8;
+            color: var(--color-text);
+        }
+
+        .x-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: var(--space-sm);
+            color: var(--color-accent);
+            text-decoration: none;
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--color-accent);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .x-link:hover {
+            background: var(--color-accent);
+            color: var(--color-bg);
+            box-shadow: 0 0 20px var(--color-accent), 0 0 40px var(--color-accent);
         }
 
         /* ================================
@@ -222,7 +302,8 @@
         .floating-element {
             position: absolute;
             border: 1px solid var(--color-accent);
-            opacity: 0.1;
+            opacity: 0.15;
+            box-shadow: 0 0 15px var(--color-accent);
             animation: float 20s ease-in-out infinite;
         }
 
@@ -259,11 +340,11 @@
         @keyframes breathe {
             0%, 100% {
                 transform: scale(1);
-                filter: brightness(1);
+                filter: drop-shadow(0 0 20px var(--color-accent)) brightness(1);
             }
             50% {
                 transform: scale(1.02);
-                filter: brightness(1.2);
+                filter: drop-shadow(0 0 30px var(--color-accent)) brightness(1.3);
             }
         }
 
@@ -298,6 +379,13 @@
             }
         }
 
+        @keyframes aboutAppear {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         @keyframes float {
             0%, 100% {
                 transform: translate(0, 0) rotate(0deg);
@@ -319,6 +407,10 @@
         @media (max-width: 768px) {
             .decorative-frame {
                 padding: var(--space-lg) var(--space-md);
+            }
+
+            .about-section {
+                padding: var(--space-sm);
             }
 
             .cursor, .cursor-dot {
@@ -353,6 +445,7 @@
             color: var(--color-accent);
             letter-spacing: 0.3em;
             animation: pulse 1s ease-in-out infinite;
+            text-shadow: 0 0 10px var(--color-accent), 0 0 20px var(--color-accent);
         }
 
         @keyframes fadeOut {
@@ -404,15 +497,31 @@
                         在做测试。看到请忽略。
                     </p>
                 </section>
+
+                <!-- 关于本站 - 新增内容区块 -->
+                <section class="about-section">
+                    <h2 class="about-title">✦ 关于本站</h2>
+                    <div class="about-content">
+                        这是我的第一次部署，我对这样的链路非常好奇，不知道后续会发生什么事情。
+                        但是我很喜欢这样的感受，这个是我用 claude code 做的。
+                        若是你也希望可以这样开发，可以联系我。
+                    </div>
+                    <a href="https://x.com/more_than7" target="_blank" class="x-link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                        @more_than7
+                    </a>
+                </section>
             </main>
         </div>
     </div>
 
     <script>
         // ================================
-        // 设计思路：创建一个有生命力的页面
-        // 1. 粒子系统跟随鼠标流动
-        // 2. 自定义光标增强交互
+        // 设计思路：创建一个有生命力的科技感页面
+        // 1. 粒子系统跟随鼠标流动（蓝色系）
+        // 2. 自定义光标增强交互（带发光效果）
         // 3. 页面加载时的动画序列
         // ================================
 
@@ -455,7 +564,7 @@
         });
 
         // ================================
-        // 粒子系统
+        // 粒子系统（蓝色系）
         // ================================
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
@@ -510,7 +619,8 @@
             draw() {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(212, 165, 116, 0.6)';
+                // 蓝色系粒子
+                ctx.fillStyle = 'rgba(0, 212, 255, 0.6)';
                 ctx.fill();
             }
         }
@@ -535,7 +645,8 @@
                     if (distance < connectionDistance) {
                         let opacity = (1 - distance / connectionDistance) * 0.3;
                         ctx.beginPath();
-                        ctx.strokeStyle = `rgba(212, 165, 116, ${opacity})`;
+                        // 蓝色系连线
+                        ctx.strokeStyle = `rgba(0, 212, 255, ${opacity})`;
                         ctx.lineWidth = 1;
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(particles[j].x, particles[j].y);
