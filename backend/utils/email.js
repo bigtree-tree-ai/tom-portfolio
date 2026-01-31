@@ -4,20 +4,20 @@
  * 功能说明：使用 nodemailer 发送联系表单提交通知邮件
  * 设计思路：
  * - 使用环境变量配置邮件服务（安全）
- * - 支持多种邮件服务商（Gmail、QQ邮箱等）
+ * - 支持多种邮件服务商（QQ邮箱、Gmail、163邮箱等）
  * - 发送失败时记录日志但不阻塞表单提交
  *
  * 关键决策：
- * - 使用 Gmail SMTP：稳定可靠
+ * - 使用 QQ 邮箱 SMTP：国内服务器访问稳定
  * - 邮件发送失败不返回错误：表单仍可提交成功
  * - 包含完整提交信息：便于查看
  *
  * 依赖关系：被 routes/contact.js 调用
  *
  * 环境变量配置：
- * - EMAIL_USER: 发件邮箱地址
- * - EMAIL_PASS: 邮箱 SMTP 密码（Gmail 需用应用专用密码）
- * - EMAIL_TO: 接收通知的邮箱地址
+ * - EMAIL_USER: 发件邮箱地址（例如：2052534606@qq.com）
+ * - EMAIL_PASS: 邮箱 SMTP 授权码（不是登录密码）
+ * - EMAIL_TO: 接收通知的邮箱地址（可选，默认与发件相同）
  */
 
 const nodemailer = require('nodemailer');
@@ -39,20 +39,61 @@ if (!isConfigured) {
 }
 
 // 创建邮件传输器
-// 设计思路：惰性初始化，只有在配置完整时才创建
+// 设计思路：根据邮箱地址自动判断 SMTP 配置
 let transporter = null;
 
 if (isConfigured) {
     try {
-        transporter = nodemailer.createTransport({
-            service: 'gmail', // 使用 Gmail
-            auth: {
-                user: emailUser,
-                pass: emailPass
-            }
-        });
+        // 根据邮箱域名自动选择 SMTP 配置
+        let smtpConfig;
 
-        // 验证配置（可选，生产环境可跳过以提高启动速度）
+        if (emailUser.includes('@qq.com') || emailUser.includes('@vip.qq.com')) {
+            // QQ 邮箱配置
+            smtpConfig = {
+                host: 'smtp.qq.com',
+                port: 465,
+                secure: true, // 使用 SSL
+                auth: {
+                    user: emailUser,
+                    pass: emailPass
+                }
+            };
+        } else if (emailUser.includes('@163.com') || emailUser.includes('@126.com')) {
+            // 网易邮箱配置
+            smtpConfig = {
+                host: emailUser.includes('@163.com') ? 'smtp.163.com' : 'smtp.126.com',
+                port: 465,
+                secure: true,
+                auth: {
+                    user: emailUser,
+                    pass: emailPass
+                }
+            };
+        } else if (emailUser.includes('@gmail.com')) {
+            // Gmail 配置
+            smtpConfig = {
+                service: 'gmail',
+                auth: {
+                    user: emailUser,
+                    pass: emailPass
+                }
+            };
+        } else {
+            // 默认配置（使用通用设置）
+            smtpConfig = {
+                host: process.env.EMAIL_HOST || 'smtp.gmail.com',
+                port: parseInt(process.env.EMAIL_PORT) || 587,
+                secure: process.env.EMAIL_SECURE === 'true',
+                auth: {
+                    user: emailUser,
+                    pass: emailPass
+                }
+            };
+        }
+
+        transporter = nodemailer.createTransport(smtpConfig);
+
+        // 验证配置
         transporter.verify((error, success) => {
             if (error) {
                 console.error('Email configuration error:', error.message);
