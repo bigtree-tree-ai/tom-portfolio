@@ -30,6 +30,7 @@ const router = express.Router();
 const db = require('../database/db');
 const { validateInput, sanitizeString } = require('../middleware/validator');
 const sendEmail = require('../utils/email');
+const sendFeishuNotification = require('../utils/feishu');
 
 /**
  * POST /api/contact
@@ -91,11 +92,15 @@ router.post('/', async (req, res) => {
         console.log(`Contact form submitted: ID ${result.lastInsertRowid}, Email: ${cleanEmail}`);
 
         // ================================
-        // 5. 发送邮件通知（异步，不阻塞响应）
+        // 5. 发送通知（异步，不阻塞响应）
         // ================================
         // 邮件发送失败不影响表单提交结果
         sendEmail({ email: cleanEmail, name: cleanName, message: cleanMessage })
             .catch(err => console.error('Email error (non-blocking):', err.message));
+
+        // 飞书通知发送失败也不影响表单提交结果
+        sendFeishuNotification({ email: cleanEmail, name: cleanName, message: cleanMessage })
+            .catch(err => console.error('Feishu notification error (non-blocking):', err.message));
 
         // ================================
         // 6. 返回成功响应
