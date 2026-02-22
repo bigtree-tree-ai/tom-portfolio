@@ -3,37 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>大树路跑跑</title>
+    <title>田大树 - 产品经理</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=Space+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         /* ================================
-           设计思路：创建自然有机的温暖空间
-           核心视觉：柔和粒子系统 + 有机曲线 + 温暖配色
-           设计理念：自然、流动、亲切，让页面有生命力
-           配色方案：米色背景 + 柔和绿色强调色（自然有机风格）
+           Anthropic 风格设计规范
+           核心理念：极简、黑白灰+荧光绿、大量留白
+           设计原则：内容优先、克制、专业
            ================================ */
 
         :root {
-            /* 色彩系统：米色背景 + 柔和绿色强调色（自然有机风格） */
-            --color-bg: #F5F0E8;
-            --color-text: #2D4739;
-            --color-accent: #7A9B76;
-            --color-accent-light: #8FB58B;
-            --color-accent-dark: #5A7A56;
-            --color-muted: #C4A484;
+            /* 色彩系统：Anthropic 风格 - 纯白背景 + 深黑文字 + 荧光绿强调 */
+            --color-bg: #FFFFFF;
+            --color-text: #1A1A1A;
+            --color-text-secondary: #666666;
+            --color-text-tertiary: #999999;
+            --color-accent: #D4FF45;
+            --color-accent-hover: #C4E93F;
+            --color-border: #E5E5E5;
+            --color-border-hover: #D4FF45;
 
             /* 字体系统 */
-            --font-display: 'Noto Serif SC', serif;
-            --font-mono: 'Space Mono', monospace;
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 
             /* 间距 */
             --space-xs: 0.5rem;
             --space-sm: 1rem;
-            --space-md: 2rem;
-            --space-lg: 4rem;
-            --space-xl: 8rem;
+            --space-md: 1.5rem;
+            --space-lg: 2.5rem;
+            --space-xl: 4rem;
+            --space-2xl: 6rem;
+            --space-3xl: 8rem;
+
+            /* 容器宽度 */
+            --max-width: 900px;
         }
 
         * {
@@ -44,353 +50,232 @@
 
         html {
             font-size: 16px;
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: var(--font-display);
+            font-family: var(--font-body);
             background-color: var(--color-bg);
             color: var(--color-text);
             min-height: 100vh;
-            overflow-x: hidden;
-            cursor: none; /* 隐藏默认光标，使用自定义光标 */
-        }
-
-        /* ================================
-           有机纹理背景（替代扫描线效果）
-           ================================ */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background:
-                radial-gradient(ellipse at 20% 30%, rgba(122, 155, 118, 0.08) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 70%, rgba(196, 164, 132, 0.06) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 50%, rgba(143, 181, 139, 0.04) 0%, transparent 70%);
-            pointer-events: none;
-            z-index: 9998;
-            animation: organicFloat 20s ease-in-out infinite;
-        }
-
-        @keyframes organicFloat {
-            0%, 100% {
-                transform: scale(1) translate(0, 0);
-            }
-            50% {
-                transform: scale(1.05) translate(10px, -10px);
-            }
-        }
-
-        /* ================================
-           粒子画布背景
-           ================================ */
-        #particle-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        /* ================================
-           自定义光标（温暖有机风格）
-           ================================ */
-        .cursor {
-            position: fixed;
-            width: 24px;
-            height: 24px;
-            border: 2px solid var(--color-accent);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.2s ease-out, opacity 0.2s ease-out;
-            box-shadow: 0 0 15px rgba(122, 155, 118, 0.3);
-            background: rgba(122, 155, 118, 0.1);
-        }
-
-        .cursor-dot {
-            position: fixed;
-            width: 8px;
-            height: 8px;
-            background: var(--color-accent);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            box-shadow: 0 0 10px rgba(122, 155, 118, 0.4);
-        }
-
-        .cursor.hover {
-            transform: scale(1.8);
-            background: var(--color-accent-light);
-            box-shadow: 0 0 20px rgba(122, 155, 118, 0.4);
+            line-height: 1.6;
         }
 
         /* ================================
            主容器
            ================================ */
         .container {
-            position: relative;
-            z-index: 2;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: var(--space-md);
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: var(--space-xl) var(--space-md);
         }
 
         /* ================================
-           主要内容区域
+           Hero 区 - 大标题
            ================================ */
-        .main-content {
-            text-align: center;
-            max-width: 800px;
+        .hero {
+            padding: var(--space-3xl) 0;
+            text-align: left;
         }
 
-        /* 装饰性边框（有机曲线风格） */
-        .decorative-frame {
-            position: relative;
-            padding: var(--space-xl) var(--space-lg);
-            border-radius: 30px;
-            background: rgba(245, 240, 232, 0.6);
-            backdrop-filter: blur(10px);
-            box-shadow:
-                0 20px 60px rgba(45, 71, 57, 0.1),
-                0 8px 24px rgba(45, 71, 57, 0.08),
-                inset 0 1px 0 rgba(255, 255, 255, 0.5);
-            animation: frameAppear 1.5s ease-out forwards;
-        }
-
-        .decorative-frame::before,
-        .decorative-frame::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 35px;
-            border: 2px solid var(--color-accent);
-            opacity: 0.3;
-        }
-
-        .decorative-frame::before {
-            top: -8px;
-            left: -8px;
-        }
-
-        .decorative-frame::after {
-            bottom: -8px;
-            right: -8px;
-        }
-
-        /* ================================
-           姓名展示 - 呼吸动画
-           ================================ */
-        .name-section {
-            margin-bottom: var(--space-lg);
-        }
-
-        .name {
-            font-size: clamp(3rem, 10vw, 7rem);
-            font-weight: 900;
-            letter-spacing: 0.2em;
-            background: linear-gradient(135deg,
-                var(--color-accent-dark) 0%,
-                var(--color-accent) 50%,
-                var(--color-accent-light) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: breathe 4s ease-in-out infinite, nameAppear 1.2s ease-out forwards;
-            opacity: 0;
-            transform: translateY(30px);
-            filter: drop-shadow(0 4px 12px rgba(122, 155, 118, 0.3));
-        }
-
-        /* ================================
-           简介文字
-           ================================ */
-        .tagline-section {
+        .hero-name {
+            font-family: var(--font-display);
+            font-size: clamp(3.5rem, 10vw, 6rem);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
             margin-bottom: var(--space-md);
-        }
-
-        .tagline {
-            font-family: var(--font-mono);
-            font-size: clamp(0.875rem, 2vw, 1.125rem);
-            color: var(--color-muted);
-            letter-spacing: 0.1em;
-            line-height: 1.8;
-            animation: taglineAppear 1s ease-out 0.5s forwards;
-            opacity: 0;
-        }
-
-        .tagline-highlight {
-            color: var(--color-accent);
-            position: relative;
-            display: inline-block;
-        }
-
-        .tagline-highlight::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, var(--color-accent-dark), var(--color-accent-light));
-            transform: scaleX(0);
-            transform-origin: right;
-            animation: underlineReveal 0.8s ease-out 1.5s forwards;
-            border-radius: 2px;
-        }
-
-        /* ================================
-           关于本站 - 自然有机风格
-           ================================ */
-        .about-section {
-            margin-top: var(--space-lg);
-            padding: var(--space-md);
-            border: 2px solid var(--color-accent);
-            border-radius: 20px;
-            background: rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(10px);
-            box-shadow:
-                0 10px 30px rgba(122, 155, 118, 0.15),
-                inset 0 1px 0 rgba(255, 255, 255, 0.6);
-            animation: aboutAppear 1s ease-out 1s forwards;
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        .about-title {
-            font-family: var(--font-mono);
-            font-size: clamp(0.75rem, 1.5vw, 0.875rem);
-            color: var(--color-accent);
-            letter-spacing: 0.2em;
-            margin-bottom: var(--space-sm);
-            text-transform: uppercase;
-        }
-
-        .about-content {
-            font-size: clamp(0.875rem, 2vw, 1rem);
-            line-height: 1.8;
             color: var(--color-text);
         }
 
-        .x-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-top: var(--space-sm);
-            color: var(--color-accent);
-            text-decoration: none;
-            font-family: var(--font-mono);
-            font-size: 0.875rem;
-            padding: 0.6rem 1.2rem;
-            border: 2px solid var(--color-accent);
-            border-radius: 25px;
-            background: rgba(122, 155, 118, 0.1);
-            transition: all 0.3s ease;
+        .hero-tagline {
+            font-family: var(--font-body);
+            font-size: clamp(1.125rem, 2vw, 1.375rem);
+            color: var(--color-text-secondary);
+            font-weight: 400;
+            max-width: 600px;
         }
 
-        .x-link:hover {
-            background: var(--color-accent);
-            color: white;
-            box-shadow: 0 8px 20px rgba(122, 155, 118, 0.3);
-            transform: translateY(-2px);
+        .hero-tagline span {
+            color: var(--color-text);
+            font-weight: 500;
         }
 
         /* ================================
-           联系表单区块 - 自然有机风格
+           分隔线
            ================================ */
-        .contact-section {
-            margin-top: var(--space-lg);
-            padding: var(--space-md);
-            border: 2px solid var(--color-accent);
-            border-radius: 20px;
-            background: rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(10px);
-            box-shadow:
-                0 10px 30px rgba(122, 155, 118, 0.15),
-                inset 0 1px 0 rgba(255, 255, 255, 0.6);
-            animation: aboutAppear 1s ease-out 1.5s forwards;
-            opacity: 0;
-            transform: translateY(20px);
+        .divider {
+            height: 1px;
+            background: var(--color-border);
+            margin: var(--space-xl) 0;
+        }
+
+        /* ================================
+           章节标题
+           ================================ */
+        .section-header {
+            margin-bottom: var(--space-lg);
         }
 
         .section-title {
-            font-family: var(--font-mono);
-            font-size: clamp(0.75rem, 1.5vw, 0.875rem);
-            color: var(--color-accent);
-            letter-spacing: 0.2em;
-            margin-bottom: var(--space-sm);
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
             text-transform: uppercase;
+            color: var(--color-text-tertiary);
+            margin-bottom: var(--space-xs);
         }
 
-        .contact-form {
+        /* ================================
+           职业经历卡片
+           ================================ */
+        .experience-section {
+            padding: var(--space-xl) 0;
+        }
+
+        .experience-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .experience-card {
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: var(--space-lg);
+            background: var(--color-bg);
+            transition: all 0.3s ease;
+        }
+
+        .experience-card:hover {
+            border-color: var(--color-accent);
+            box-shadow: 0 4px 20px rgba(212, 255, 69, 0.15);
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--space-sm);
+            flex-wrap: wrap;
+            gap: var(--space-xs);
+        }
+
+        .experience-company {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        .experience-period {
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+            color: var(--color-text-tertiary);
+            white-space: nowrap;
+        }
+
+        .experience-roles {
             display: flex;
             flex-direction: column;
             gap: var(--space-sm);
         }
 
+        .experience-role {
+            padding-left: var(--space-md);
+            border-left: 2px solid var(--color-border);
+        }
+
+        .experience-role:hover {
+            border-left-color: var(--color-accent);
+        }
+
+        .role-title {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--color-text);
+            margin-bottom: 0.25rem;
+        }
+
+        .role-desc {
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
+            line-height: 1.5;
+        }
+
+        /* ================================
+           联系表单区块 - Anthropic 风格
+           ================================ */
+        .contact-section {
+            padding: var(--space-xl) 0;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+            max-width: 500px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: var(--space-md);
+        }
+
         .form-group {
-            position: relative;
+            flex: 1;
             display: flex;
             flex-direction: column;
         }
 
         .form-label {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--color-muted);
-            letter-spacing: 0.1em;
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--color-text);
             margin-bottom: 0.5rem;
-            text-transform: uppercase;
         }
 
         .form-input,
         .form-textarea {
-            background: rgba(255, 255, 255, 0.8);
-            border: 2px solid rgba(196, 164, 132, 0.3);
-            border-radius: 12px;
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
             padding: 0.875rem 1rem;
             color: var(--color-text);
-            font-family: var(--font-display);
+            font-family: var(--font-body);
             font-size: 1rem;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             outline: none;
         }
 
         .form-input:focus,
         .form-textarea:focus {
-            border-color: var(--color-accent);
-            box-shadow: 0 0 0 4px rgba(122, 155, 118, 0.1);
-            background: rgba(255, 255, 255, 0.95);
+            border-color: var(--color-text);
+            box-shadow: 0 0 0 3px rgba(26, 26, 26, 0.05);
         }
 
         .form-input::placeholder,
         .form-textarea::placeholder {
-            color: var(--color-muted);
-            opacity: 0.6;
+            color: var(--color-text-tertiary);
         }
 
         .form-textarea {
             resize: vertical;
-            min-height: 80px;
-            font-family: var(--font-display);
+            min-height: 100px;
         }
 
         .error-message {
-            font-family: var(--font-mono);
+            font-family: var(--font-body);
             font-size: 0.75rem;
-            color: #c45454;
+            color: #E53935;
             margin-top: 0.25rem;
             min-height: 1rem;
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.2s ease;
         }
 
         .error-message.visible {
@@ -398,35 +283,35 @@
         }
 
         .char-count {
-            font-family: var(--font-mono);
-            font-size: 0.625rem;
-            color: var(--color-muted);
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            color: var(--color-text-tertiary);
             text-align: right;
             margin-top: 0.25rem;
         }
 
         .submit-btn {
-            position: relative;
             margin-top: var(--space-sm);
-            padding: 0.875rem 2rem;
+            padding: 1rem 2rem;
             background: var(--color-accent);
             border: none;
-            border-radius: 25px;
-            color: white;
-            font-family: var(--font-mono);
-            font-size: 0.875rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
+            border-radius: 8px;
+            color: var(--color-text);
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(122, 155, 118, 0.3);
+            transition: all 0.2s ease;
+            align-self: flex-start;
         }
 
         .submit-btn:hover:not(:disabled) {
-            background: var(--color-accent-dark);
-            box-shadow: 0 6px 20px rgba(122, 155, 118, 0.4);
-            transform: translateY(-2px);
+            background: var(--color-accent-hover);
+            transform: translateY(-1px);
+        }
+
+        .submit-btn:active:not(:disabled) {
+            transform: translateY(0);
         }
 
         .submit-btn:disabled {
@@ -439,8 +324,8 @@
             display: inline-block;
             width: 16px;
             height: 16px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-top-color: white;
+            border: 2px solid rgba(26, 26, 26, 0.2);
+            border-top-color: var(--color-text);
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
         }
@@ -450,14 +335,13 @@
         }
 
         .form-status {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            text-align: center;
-            padding: 0.75rem;
-            border-radius: 12px;
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
             margin-top: var(--space-sm);
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.2s ease;
         }
 
         .form-status.visible {
@@ -465,160 +349,76 @@
         }
 
         .form-status.success {
-            background: rgba(122, 155, 118, 0.15);
-            border: 1px solid var(--color-accent);
-            color: var(--color-accent-dark);
+            background: rgba(212, 255, 69, 0.2);
+            color: var(--color-text);
         }
 
         .form-status.error {
-            background: rgba(196, 84, 84, 0.1);
-            border: 1px solid #c45454;
-            color: #c45454;
+            background: rgba(229, 57, 53, 0.1);
+            color: #E53935;
         }
 
         /* ================================
-           装饰性元素（有机流动形状）
+           页脚
            ================================ */
-        .decorative-elements {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            overflow: hidden;
+        .footer {
+            padding: var(--space-xl) 0;
+            border-top: 1px solid var(--color-border);
+            margin-top: var(--space-xl);
         }
 
-        .floating-element {
-            position: absolute;
-            border: 2px solid var(--color-accent);
-            opacity: 0.12;
-            animation: float 25s ease-in-out infinite;
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
         }
 
-        .floating-element:nth-child(1) {
-            width: 300px;
-            height: 300px;
-            top: 10%;
-            left: 5%;
-            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
-            animation-delay: 0s;
-            background: radial-gradient(ellipse at center, rgba(122, 155, 118, 0.08) 0%, transparent 70%);
+        .footer-text {
+            font-size: 0.875rem;
+            color: var(--color-text-tertiary);
         }
 
-        .floating-element:nth-child(2) {
-            width: 200px;
-            height: 200px;
-            bottom: 20%;
-            right: 10%;
-            border-radius: 60% 40% 50% 50% / 50% 60% 40% 50%;
-            animation-delay: -8s;
-            background: radial-gradient(ellipse at center, rgba(196, 164, 132, 0.08) 0%, transparent 70%);
+        .footer-link {
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
         }
 
-        .floating-element:nth-child(3) {
-            width: 150px;
-            height: 150px;
-            top: 50%;
-            right: 5%;
-            border-radius: 50% 50% 40% 60% / 40% 60% 60% 40%;
-            animation-delay: -15s;
-            background: radial-gradient(ellipse at center, rgba(143, 181, 139, 0.1) 0%, transparent 70%);
-        }
-
-        /* ================================
-           动画定义
-           ================================ */
-        @keyframes breathe {
-            0%, 100% {
-                transform: scale(1);
-                filter: drop-shadow(0 4px 12px rgba(122, 155, 118, 0.3));
-            }
-            50% {
-                transform: scale(1.02);
-                filter: drop-shadow(0 6px 16px rgba(122, 155, 118, 0.4));
-            }
-        }
-
-        @keyframes nameAppear {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes taglineAppear {
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes underlineReveal {
-            to {
-                transform: scaleX(1);
-                transform-origin: left;
-            }
-        }
-
-        @keyframes frameAppear {
-            from {
-                opacity: 0;
-                transform: scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        @keyframes aboutAppear {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translate(0, 0) rotate(0deg) scale(1);
-            }
-            25% {
-                transform: translate(15px, -15px) rotate(3deg) scale(1.02);
-            }
-            50% {
-                transform: translate(-8px, 15px) rotate(-2deg) scale(0.98);
-            }
-            75% {
-                transform: translate(12px, 8px) rotate(2deg) scale(1.01);
-            }
+        .footer-link:hover {
+            color: var(--color-accent-hover);
         }
 
         /* ================================
            响应式设计
            ================================ */
         @media (max-width: 768px) {
-            .decorative-frame {
+            .container {
                 padding: var(--space-lg) var(--space-md);
-                border-radius: 20px;
             }
 
-            .about-section,
-            .contact-section {
-                padding: var(--space-sm);
-                border-radius: 15px;
+            .hero {
+                padding: var(--space-xl) 0;
             }
 
-            .cursor, .cursor-dot {
-                display: none; /* 移动端隐藏自定义光标 */
+            .form-row {
+                flex-direction: column;
             }
 
-            body {
-                cursor: auto;
+            .experience-header {
+                flex-direction: column;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
             }
         }
 
         /* ================================
-           加载状态（温暖风格）
+           加载状态
            ================================ */
         .loading-screen {
             position: fixed;
@@ -631,15 +431,14 @@
             justify-content: center;
             align-items: center;
             z-index: 10000;
-            animation: fadeOut 0.5s ease-out 1s forwards;
+            animation: fadeOut 0.3s ease-out 0.5s forwards;
         }
 
         .loading-text {
-            font-family: var(--font-mono);
-            font-size: 0.875rem;
-            color: var(--color-accent);
-            letter-spacing: 0.3em;
-            animation: pulse 1.5s ease-in-out infinite;
+            font-family: var(--font-display);
+            font-size: 1rem;
+            color: var(--color-text);
+            letter-spacing: 0.1em;
         }
 
         @keyframes fadeOut {
@@ -647,11 +446,6 @@
                 opacity: 0;
                 pointer-events: none;
             }
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 0.4; }
-            50% { opacity: 1; }
         }
     </style>
 </head>
@@ -661,284 +455,165 @@
         <span class="loading-text">加载中...</span>
     </div>
 
-    <!-- 自定义光标 -->
-    <div class="cursor"></div>
-    <div class="cursor-dot"></div>
-
-    <!-- 粒子画布 -->
-    <canvas id="particle-canvas"></canvas>
-
-    <!-- 装饰性背景元素 -->
-    <div class="decorative-elements">
-        <div class="floating-element"></div>
-        <div class="floating-element"></div>
-        <div class="floating-element"></div>
-    </div>
-
     <!-- 主容器 -->
     <div class="container">
-        <div class="decorative-frame">
-            <main class="main-content">
-                <!-- 姓名区域 -->
-                <section class="name-section">
-                    <h1 class="name">大树路跑跑</h1>
-                </section>
+        <!-- Hero 区 - 大标题 -->
+        <section class="hero">
+            <h1 class="hero-name">田大树</h1>
+            <p class="hero-tagline">
+                <span>产品经理</span> / 10年+ 互联网产品经验<br>
+                专注于交易型产品、销售工具、B2C 业务
+            </p>
+        </section>
 
-                <!-- 简介区域 -->
-                <section class="tagline-section">
-                    <p class="tagline">
-                        <span class="tagline-highlight">我是一个产品经理</span><br>
-                        在做测试。看到请忽略。
-                    </p>
-                </section>
+        <div class="divider"></div>
 
-                <!-- 关于本站 -->
-                <section class="about-section">
-                    <h2 class="about-title">✦ 关于本站</h2>
-                    <div class="about-content">
-                        这是我的第一次部署，我对这样的链路非常好奇，不知道后续会发生什么事情。
-                        但是我很喜欢这样的感受，这个是我用 claude code 做的。
-                        若是你也希望可以这样开发，可以联系我。
+        <!-- 职业经历 -->
+        <section class="experience-section">
+            <div class="section-header">
+                <p class="section-title">职业经历</p>
+            </div>
+
+            <div class="experience-list">
+                <!-- 车好多集团 -->
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <h3 class="experience-company">车好多集团</h3>
+                        <span class="experience-period">2016.10 - 至今</span>
                     </div>
-                    <a href="https://x.com/more_than7" target="_blank" class="x-link">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                        </svg>
-                        @more_than7
-                    </a>
-                </section>
-
-                <!-- 联系表单区块 -->
-                <section class="contact-section">
-                    <h2 class="section-title">✦ 联系我</h2>
-                    <form id="contact-form" class="contact-form" novalidate>
-                        <!-- 邮箱输入 -->
-                        <div class="form-group">
-                            <label for="email" class="form-label">邮箱</label>
-                            <input
-                                type="email"
-                                id="email"
-                                name="email"
-                                class="form-input"
-                                placeholder="your@email.com"
-                                required
-                                autocomplete="email"
-                            >
-                            <span class="error-message" id="email-error"></span>
+                    <div class="experience-roles">
+                        <div class="experience-role">
+                            <p class="role-title">毛豆新车 · 销售产品线负责人</p>
+                            <p class="role-desc">负责新车销售全链路产品设计，包括 CRM、销售工具、客户管理等核心系统</p>
                         </div>
-
-                        <!-- 称呼输入 -->
-                        <div class="form-group">
-                            <label for="name" class="form-label">怎么称呼</label>
-                            <input
-                                type="text"
-                                id="name"
-                                name="name"
-                                class="form-input"
-                                placeholder="请输入您的称呼"
-                                maxlength="20"
-                                required
-                                autocomplete="name"
-                            >
-                            <span class="error-message" id="name-error"></span>
-                            <span class="char-count"><span id="char-count">0</span>/20</span>
+                        <div class="experience-role">
+                            <p class="role-title">瓜子二手车 C2B · 产品负责人</p>
+                            <p class="role-desc">从 0 到 1 搭建 C2B 业务线，设计拍卖系统、定价模型、车商工具</p>
                         </div>
+                    </div>
+                </div>
 
-                        <!-- 备注输入 -->
-                        <div class="form-group">
-                            <label for="message" class="form-label">备注</label>
-                            <textarea
-                                id="message"
-                                name="message"
-                                class="form-textarea"
-                                rows="4"
-                                placeholder="你还有什么想对我说的，请联系我"
-                                maxlength="500"
-                            ></textarea>
-                            <span class="error-message" id="message-error"></span>
+                <!-- 美团点评集团 -->
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <h3 class="experience-company">美团点评集团</h3>
+                        <span class="experience-period">2015.01 - 2016.10</span>
+                    </div>
+                    <div class="experience-roles">
+                        <div class="experience-role">
+                            <p class="role-title">美团外卖鲜果业务 · 产品负责人</p>
+                            <p class="role-desc">从 0 到 1 搭建鲜果品类业务，设计供应链系统、商品管理、配送策略</p>
                         </div>
+                        <div class="experience-role">
+                            <p class="role-title">美团早餐 · 产品经理</p>
+                            <p class="role-desc">负责早餐业务城市拓展的产品方案设计</p>
+                        </div>
+                    </div>
+                </div>
 
-                        <!-- 提交按钮 -->
-                        <button type="submit" class="submit-btn" id="submit-btn">
-                            <span class="btn-text">提交</span>
-                            <span class="btn-loader" style="display: none;"></span>
-                        </button>
+                <!-- 搜狐集团 -->
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <h3 class="experience-company">搜狐集团</h3>
+                        <span class="experience-period">2012.03 - 2014.12</span>
+                    </div>
+                    <div class="experience-roles">
+                        <div class="experience-role">
+                            <p class="role-title">搜狐快站 · 产品经理</p>
+                            <p class="role-desc">参与移动建站产品设计，服务中小企业建站需求</p>
+                        </div>
+                        <div class="experience-role">
+                            <p class="role-title">搜狐网 · 产品运营</p>
+                            <p class="role-desc">负责频道运营数据分析和产品优化</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-                        <!-- 状态消息 -->
-                        <div id="form-status" class="form-status"></div>
-                    </form>
-                </section>
-            </main>
-        </div>
+        <div class="divider"></div>
+
+        <!-- 联系表单 -->
+        <section class="contact-section">
+            <div class="section-header">
+                <p class="section-title">联系我</p>
+            </div>
+
+            <form id="contact-form" class="contact-form" novalidate>
+                <div class="form-row">
+                    <!-- 邮箱输入 -->
+                    <div class="form-group">
+                        <label for="email" class="form-label">邮箱</label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            class="form-input"
+                            placeholder="your@email.com"
+                            required
+                            autocomplete="email"
+                        >
+                        <span class="error-message" id="email-error"></span>
+                    </div>
+
+                    <!-- 称呼输入 -->
+                    <div class="form-group">
+                        <label for="name" class="form-label">称呼</label>
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            class="form-input"
+                            placeholder="怎么称呼您"
+                            maxlength="20"
+                            required
+                            autocomplete="name"
+                        >
+                        <span class="error-message" id="name-error"></span>
+                        <span class="char-count"><span id="char-count">0</span>/20</span>
+                    </div>
+                </div>
+
+                <!-- 备注输入 -->
+                <div class="form-group">
+                    <label for="message" class="form-label">留言</label>
+                    <textarea
+                        id="message"
+                        name="message"
+                        class="form-textarea"
+                        rows="4"
+                        placeholder="想说点什么..."
+                        maxlength="500"
+                    ></textarea>
+                    <span class="error-message" id="message-error"></span>
+                </div>
+
+                <!-- 提交按钮 -->
+                <button type="submit" class="submit-btn" id="submit-btn">
+                    <span class="btn-text">发送</span>
+                    <span class="btn-loader" style="display: none;"></span>
+                </button>
+
+                <!-- 状态消息 -->
+                <div id="form-status" class="form-status"></div>
+            </form>
+        </section>
+
+        <!-- 页脚 -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p class="footer-text">© 2026 田大树</p>
+                <a href="https://x.com/more_than7" target="_blank" class="footer-link">
+                    X @more_than7
+                </a>
+            </div>
+        </footer>
     </div>
 
     <script>
         // ================================
-        // 设计思路：创建自然有机的温暖页面
-        // 1. 粒子系统使用绿色系，更自然的流动
-        // 2. 自定义光标使用温暖颜色
-        // 3. 页面加载时的柔和动画序列
-        // ================================
-
-        // ================================
-        // 自定义光标逻辑
-        // ================================
-        const cursor = document.querySelector('.cursor');
-        const cursorDot = document.querySelector('.cursor-dot');
-        let mouseX = 0, mouseY = 0;
-        let cursorX = 0, cursorY = 0;
-        let dotX = 0, dotY = 0;
-
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        });
-
-        function animateCursor() {
-            // 光标圆圈有延迟，创造平滑跟随效果
-            cursorX += (mouseX - cursorX) * 0.15;
-            cursorY += (mouseY - cursorY) * 0.15;
-            cursor.style.left = cursorX - 12 + 'px';
-            cursor.style.top = cursorY - 12 + 'px';
-
-            // 光标圆点更快速跟随
-            dotX += (mouseX - dotX) * 0.3;
-            dotY += (mouseY - dotY) * 0.3;
-            cursorDot.style.left = dotX - 4 + 'px';
-            cursorDot.style.top = dotY - 4 + 'px';
-
-            requestAnimationFrame(animateCursor);
-        }
-        animateCursor();
-
-        // 鼠标悬停在可交互元素上时放大光标
-        const interactiveElements = document.querySelectorAll('a, button, input, textarea');
-        interactiveElements.forEach(el => {
-            el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-            el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-        });
-
-        // ================================
-        // 粒子系统（自然绿色系）
-        // ================================
-        const canvas = document.getElementById('particle-canvas');
-        const ctx = canvas.getContext('2d');
-
-        let particles = [];
-        const particleCount = 80;
-        const connectionDistance = 150;
-        const mouseRadius = 200;
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.vx = (Math.random() - 0.5) * 0.3;
-                this.vy = (Math.random() - 0.5) * 0.3;
-                this.radius = Math.random() * 3 + 1;
-                this.baseX = this.x;
-                this.baseY = this.y;
-                this.density = Math.random() * 30 + 1;
-                // 绿色系粒子颜色变化
-                const colors = [
-                    'rgba(122, 155, 118, 0.6)',
-                    'rgba(143, 181, 139, 0.5)',
-                    'rgba(90, 122, 86, 0.5)',
-                    'rgba(196, 164, 132, 0.4)'
-                ];
-                this.color = colors[Math.floor(Math.random() * colors.length)];
-            }
-
-            update() {
-                // 更自然的缓慢运动
-                this.x += this.vx;
-                this.y += this.vy;
-
-                // 鼠标吸引效果（更柔和）
-                let dx = mouseX - this.x;
-                let dy = mouseY - this.y;
-                let distance = Math.sqrt(dx * dx + dy * dy);
-
-                if (distance < mouseRadius) {
-                    let force = (mouseRadius - distance) / mouseRadius;
-                    let directionX = dx / distance;
-                    let directionY = dy / distance;
-                    this.x += directionX * force * 1.5;
-                    this.y += directionY * force * 1.5;
-                }
-
-                // 边界检测
-                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
-            }
-
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fillStyle = this.color;
-                ctx.fill();
-            }
-        }
-
-        // 初始化粒子
-        function initParticles() {
-            particles = [];
-            for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle());
-            }
-        }
-        initParticles();
-
-        // 绘制粒子间的连线（柔和的绿色）
-        function connectParticles() {
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i + 1; j < particles.length; j++) {
-                    let dx = particles[i].x - particles[j].x;
-                    let dy = particles[i].y - particles[j].y;
-                    let distance = Math.sqrt(dx * dx + dy * dy);
-
-                    if (distance < connectionDistance) {
-                        let opacity = (1 - distance / connectionDistance) * 0.2;
-                        ctx.beginPath();
-                        ctx.strokeStyle = `rgba(122, 155, 118, ${opacity})`;
-                        ctx.lineWidth = 1;
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.stroke();
-                    }
-                }
-            }
-        }
-
-        // 动画循环
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            particles.forEach(particle => {
-                particle.update();
-                particle.draw();
-            });
-
-            connectParticles();
-            requestAnimationFrame(animate);
-        }
-        animate();
-
-        // 移动端减少粒子数量
-        if (window.innerWidth < 768) {
-            particles = particles.slice(0, 30);
-        }
-
-        // ================================
         // 联系表单逻辑
-        // 设计思路：
+        // 设计思路：Anthropic 风格 - 简洁、无干扰、功能优先
         // 1. 客户端验证：邮箱格式、字符限制
         // 2. 提交状态管理：加载中、成功、失败
         // 3. 错误提示：清晰的错误信息
@@ -1018,9 +693,9 @@
                 charCount.textContent = length;
 
                 if (length >= 20) {
-                    charCount.style.color = '#c45454';
+                    charCount.style.color = '#E53935';
                 } else {
-                    charCount.style.color = 'var(--color-muted)';
+                    charCount.style.color = '';
                 }
             });
 
@@ -1089,7 +764,7 @@
 
                     if (result.success) {
                         // 提交成功
-                        showStatus('提交成功，感谢您的留言！', 'success');
+                        showStatus('发送成功，感谢您的留言！', 'success');
                         form.reset();
                         charCount.textContent = '0';
                     } else {
@@ -1102,7 +777,7 @@
                                 else showStatus(err, 'error');
                             });
                         } else {
-                            showStatus(result.error || '提交失败，请稍后重试', 'error');
+                            showStatus(result.error || '发送失败，请稍后重试', 'error');
                         }
                     }
                 } catch (error) {
