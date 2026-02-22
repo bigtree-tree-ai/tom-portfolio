@@ -2,47 +2,31 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>田大树 - 产品经理 | 10年互联网产品经验</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>田大树 - 产品经理</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         /* ================================
-           设计理念：专业、现代、有设计感
-           风格定位：高端商务 + 现代科技
-           配色：深色底 + 金铜色点缀
+           移动端优先设计
+           风格：深色底 + 金铜色点缀
+           布局：紧凑、信息密度高
            ================================ */
 
         :root {
-            /* 色彩系统：深色底 + 金铜色点缀 */
-            --color-bg-primary: #0D0D0D;
-            --color-bg-secondary: #1A1A1A;
-            --color-bg-card: #141414;
-            --color-text-primary: #FAFAFA;
-            --color-text-secondary: #A0A0A0;
-            --color-text-muted: #666666;
+            --color-bg: #0D0D0D;
+            --color-bg-card: #161616;
+            --color-text: #FAFAFA;
+            --color-text-secondary: #999;
+            --color-text-muted: #666;
             --color-accent: #C9A962;
             --color-accent-light: #E5D4A1;
-            --color-accent-dark: #8B7355;
             --color-border: #2A2A2A;
             --color-border-accent: #3D3528;
 
-            /* 字体系统 */
-            --font-display: 'Noto Serif SC', 'Songti SC', serif;
-            --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif;
-
-            /* 间距 */
-            --space-xs: 0.5rem;
-            --space-sm: 1rem;
-            --space-md: 1.5rem;
-            --space-lg: 2rem;
-            --space-xl: 3rem;
-            --space-2xl: 5rem;
-            --space-3xl: 8rem;
-
-            /* 容器 */
-            --max-width: 1200px;
+            --font-display: 'Noto Serif SC', serif;
+            --font-body: 'DM Sans', -apple-system, 'PingFang SC', sans-serif;
         }
 
         * {
@@ -52,203 +36,106 @@
         }
 
         html {
-            font-size: 16px;
-            scroll-behavior: smooth;
+            font-size: 14px;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
             font-family: var(--font-body);
-            background-color: var(--color-bg-primary);
-            color: var(--color-text-primary);
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.5;
             min-height: 100vh;
-            line-height: 1.7;
-            overflow-x: hidden;
         }
 
-        /* ================================
-           背景装饰
-           ================================ */
-        .bg-pattern {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.03;
-            background-image:
-                radial-gradient(circle at 25% 25%, var(--color-accent) 1px, transparent 1px),
-                radial-gradient(circle at 75% 75%, var(--color-accent) 1px, transparent 1px);
-            background-size: 60px 60px;
-        }
-
-        .bg-glow {
-            position: fixed;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            pointer-events: none;
-            z-index: 0;
-            background: radial-gradient(ellipse at 30% 20%, rgba(201, 169, 98, 0.08) 0%, transparent 50%),
-                        radial-gradient(ellipse at 70% 80%, rgba(201, 169, 98, 0.05) 0%, transparent 50%);
-            animation: glowFloat 20s ease-in-out infinite;
-        }
-
-        @keyframes glowFloat {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(-5%, 3%); }
-        }
-
-        /* ================================
-           主容器
-           ================================ */
         .container {
-            position: relative;
-            z-index: 1;
-            max-width: var(--max-width);
-            margin: 0 auto;
-            padding: 0 var(--space-lg);
+            padding: 0 16px;
+            max-width: 100%;
         }
 
-        /* ================================
-           导航栏
-           ================================ */
+        /* 导航栏 */
         .nav {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 100;
-            padding: var(--space-md) 0;
-            background: rgba(13, 13, 13, 0.8);
-            backdrop-filter: blur(20px);
+            padding: 12px 0;
+            background: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--color-border);
-            transition: all 0.3s ease;
         }
 
-        .nav-content {
-            max-width: var(--max-width);
-            margin: 0 auto;
-            padding: 0 var(--space-lg);
+        .nav-inner {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 0 16px;
         }
 
         .nav-logo {
             font-family: var(--font-display);
-            font-size: 1.25rem;
+            font-size: 1rem;
             font-weight: 700;
             color: var(--color-accent);
-            text-decoration: none;
-            letter-spacing: 0.05em;
         }
 
         .nav-links {
             display: flex;
-            gap: var(--space-lg);
-            list-style: none;
+            gap: 16px;
         }
 
         .nav-links a {
             color: var(--color-text-secondary);
             text-decoration: none;
-            font-size: 0.875rem;
+            font-size: 0.75rem;
             font-weight: 500;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            transition: color 0.3s ease;
-            position: relative;
         }
 
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: var(--color-accent);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--color-accent);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        /* ================================
-           Hero 区域
-           ================================ */
+        /* Hero 区 */
         .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: var(--space-3xl) 0;
-            position: relative;
-        }
-
-        .hero-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--space-2xl);
-            align-items: center;
-        }
-
-        .hero-text {
-            animation: fadeInUp 1s ease-out;
+            padding: 80px 0 32px;
         }
 
         .hero-label {
             display: inline-block;
-            font-family: var(--font-body);
-            font-size: 0.75rem;
+            font-size: 0.625rem;
             font-weight: 600;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
+            letter-spacing: 0.1em;
             color: var(--color-accent);
-            margin-bottom: var(--space-md);
-            padding: 0.5rem 1rem;
+            padding: 4px 8px;
             border: 1px solid var(--color-accent);
-            border-radius: 2px;
+            margin-bottom: 12px;
         }
 
         .hero-name {
             font-family: var(--font-display);
-            font-size: clamp(3rem, 6vw, 5rem);
-            font-weight: 900;
-            line-height: 1.1;
-            margin-bottom: var(--space-md);
-            background: linear-gradient(135deg, var(--color-text-primary) 0%, var(--color-accent-light) 100%);
+            font-size: 2.25rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, var(--color-text) 0%, var(--color-accent-light) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
 
         .hero-title {
-            font-family: var(--font-display);
-            font-size: clamp(1.5rem, 3vw, 2rem);
-            font-weight: 600;
+            font-size: 1rem;
             color: var(--color-text-secondary);
-            margin-bottom: var(--space-lg);
+            margin-bottom: 12px;
         }
 
         .hero-desc {
-            font-size: 1.125rem;
+            font-size: 0.875rem;
             color: var(--color-text-muted);
-            line-height: 1.8;
-            margin-bottom: var(--space-xl);
+            line-height: 1.6;
+            margin-bottom: 20px;
         }
 
         .hero-stats {
             display: flex;
-            gap: var(--space-xl);
-            padding-top: var(--space-lg);
+            gap: 24px;
+            padding-top: 16px;
             border-top: 1px solid var(--color-border);
         }
 
@@ -256,357 +143,181 @@
             text-align: left;
         }
 
-        .stat-number {
+        .stat-num {
             font-family: var(--font-display);
-            font-size: 2.5rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: var(--color-accent);
-            line-height: 1;
         }
 
         .stat-label {
-            font-size: 0.875rem;
+            font-size: 0.625rem;
             color: var(--color-text-muted);
-            margin-top: 0.5rem;
         }
 
-        .hero-visual {
-            position: relative;
-            animation: fadeInRight 1s ease-out 0.3s both;
-        }
-
-        .hero-card {
-            background: var(--color-bg-card);
-            border: 1px solid var(--color-border);
-            border-radius: 16px;
-            padding: var(--space-xl);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--color-accent), var(--color-accent-light), var(--color-accent));
-        }
-
-        .hero-card-title {
-            font-family: var(--font-display);
-            font-size: 1.125rem;
-            font-weight: 600;
-            margin-bottom: var(--space-md);
-            color: var(--color-text-primary);
-        }
-
-        .skill-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: var(--space-xs);
-        }
-
-        .skill-tag {
-            padding: 0.375rem 0.75rem;
-            background: rgba(201, 169, 98, 0.1);
-            border: 1px solid var(--color-border-accent);
-            border-radius: 4px;
-            font-size: 0.75rem;
-            color: var(--color-accent-light);
-            font-weight: 500;
-        }
-
-        /* ================================
-           章节通用样式
-           ================================ */
-        section {
-            padding: var(--space-3xl) 0;
-        }
-
-        .section-header {
-            margin-bottom: var(--space-2xl);
-        }
-
-        .section-number {
-            font-family: var(--font-display);
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: var(--color-accent);
-            letter-spacing: 0.1em;
-            margin-bottom: var(--space-sm);
+        /* 章节标题 */
+        .section {
+            padding: 32px 0;
         }
 
         .section-title {
             font-family: var(--font-display);
-            font-size: clamp(2rem, 4vw, 3rem);
+            font-size: 1.25rem;
             font-weight: 700;
-            color: var(--color-text-primary);
-            margin-bottom: var(--space-sm);
+            margin-bottom: 16px;
+            color: var(--color-text);
         }
 
-        .section-subtitle {
-            font-size: 1.125rem;
-            color: var(--color-text-muted);
-        }
-
-        /* ================================
-           职业经历
-           ================================ */
-        .experience-timeline {
-            position: relative;
-            padding-left: var(--space-xl);
-        }
-
-        .experience-timeline::before {
+        .section-title::before {
             content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(to bottom, var(--color-accent), var(--color-border));
+            display: inline-block;
+            width: 3px;
+            height: 14px;
+            background: var(--color-accent);
+            margin-right: 8px;
+            vertical-align: middle;
         }
 
+        /* 职业经历 */
         .experience-item {
-            position: relative;
-            margin-bottom: var(--space-2xl);
-            padding-left: var(--space-lg);
-            animation: fadeInUp 0.8s ease-out both;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--color-border);
         }
 
-        .experience-item:nth-child(1) { animation-delay: 0.1s; }
-        .experience-item:nth-child(2) { animation-delay: 0.2s; }
-        .experience-item:nth-child(3) { animation-delay: 0.3s; }
-
-        .experience-item::before {
-            content: '';
-            position: absolute;
-            left: calc(-1 * var(--space-xl) - 5px);
-            top: 8px;
-            width: 12px;
-            height: 12px;
-            background: var(--color-bg-primary);
-            border: 2px solid var(--color-accent);
-            border-radius: 50%;
+        .experience-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
         }
 
-        .experience-header {
+        .exp-header {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: var(--space-md);
-            flex-wrap: wrap;
-            gap: var(--space-sm);
+            align-items: center;
+            margin-bottom: 12px;
         }
 
-        .experience-company {
+        .exp-company {
             font-family: var(--font-display);
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--color-text-primary);
-        }
-
-        .experience-period {
-            font-size: 0.875rem;
-            color: var(--color-accent);
+            font-size: 1rem;
             font-weight: 600;
-            letter-spacing: 0.05em;
-            padding: 0.25rem 0.75rem;
+            color: var(--color-text);
+        }
+
+        .exp-period {
+            font-size: 0.625rem;
+            color: var(--color-accent);
+            padding: 2px 6px;
             background: rgba(201, 169, 98, 0.1);
-            border-radius: 4px;
+            border-radius: 2px;
         }
 
-        .experience-roles {
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-lg);
-        }
-
-        .role-card {
+        .role-item {
             background: var(--color-bg-card);
             border: 1px solid var(--color-border);
-            border-radius: 12px;
-            padding: var(--space-lg);
-            transition: all 0.3s ease;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 8px;
         }
 
-        .role-card:hover {
-            border-color: var(--color-border-accent);
-            transform: translateX(8px);
-        }
-
-        .role-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: var(--space-sm);
-            flex-wrap: wrap;
-            gap: var(--space-xs);
+        .role-item:last-child {
+            margin-bottom: 0;
         }
 
         .role-title {
-            font-family: var(--font-display);
-            font-size: 1.125rem;
+            font-size: 0.875rem;
             font-weight: 600;
-            color: var(--color-text-primary);
-        }
-
-        .role-team {
-            font-size: 0.75rem;
-            color: var(--color-text-muted);
-            padding: 0.25rem 0.5rem;
-            background: var(--color-bg-secondary);
-            border-radius: 4px;
+            color: var(--color-text);
+            margin-bottom: 4px;
         }
 
         .role-desc {
-            font-size: 0.9375rem;
+            font-size: 0.75rem;
             color: var(--color-text-secondary);
-            line-height: 1.7;
-            margin-bottom: var(--space-sm);
+            line-height: 1.5;
+            margin-bottom: 8px;
         }
 
         .role-highlights {
             display: flex;
             flex-wrap: wrap;
-            gap: var(--space-sm);
+            gap: 6px;
         }
 
-        .highlight-item {
-            display: flex;
-            align-items: center;
-            gap: var(--space-xs);
-            font-size: 0.8125rem;
-            color: var(--color-text-muted);
+        .highlight {
+            font-size: 0.625rem;
+            color: var(--color-accent-light);
+            padding: 2px 6px;
+            background: rgba(201, 169, 98, 0.1);
+            border-radius: 2px;
         }
 
-        .highlight-item::before {
-            content: '';
-            width: 6px;
-            height: 6px;
-            background: var(--color-accent);
-            border-radius: 50%;
-        }
-
-        /* ================================
-           核心能力
-           ================================ */
+        /* 核心能力 */
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: var(--space-lg);
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
         }
 
-        .skill-card {
+        .skill-item {
             background: var(--color-bg-card);
             border: 1px solid var(--color-border);
-            border-radius: 12px;
-            padding: var(--space-lg);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .skill-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: var(--color-accent);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.3s ease;
-        }
-
-        .skill-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .skill-card:hover {
-            border-color: var(--color-border-accent);
-            transform: translateY(-4px);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
         }
 
         .skill-icon {
-            width: 48px;
-            height: 48px;
-            background: rgba(201, 169, 98, 0.1);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: var(--space-md);
-            font-size: 1.5rem;
+            font-size: 1.25rem;
+            margin-bottom: 6px;
         }
 
-        .skill-card-title {
-            font-family: var(--font-display);
-            font-size: 1.125rem;
+        .skill-name {
+            font-size: 0.75rem;
             font-weight: 600;
-            color: var(--color-text-primary);
-            margin-bottom: var(--space-xs);
+            color: var(--color-text);
         }
 
-        .skill-card-desc {
-            font-size: 0.875rem;
-            color: var(--color-text-muted);
-            line-height: 1.6;
-        }
-
-        /* ================================
-           联系表单
-           ================================ */
+        /* 联系表单 */
         .contact-section {
-            background: var(--color-bg-secondary);
-            margin: 0 calc(-1 * var(--space-lg));
-            padding: var(--space-3xl) var(--space-lg);
-        }
-
-        .contact-content {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-md);
+            background: var(--color-bg-card);
+            margin: 0 -16px;
+            padding: 32px 16px;
         }
 
         .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-xs);
+            margin-bottom: 12px;
         }
 
         .form-label {
-            font-size: 0.875rem;
-            font-weight: 500;
+            display: block;
+            font-size: 0.75rem;
             color: var(--color-text-secondary);
+            margin-bottom: 4px;
         }
 
         .form-input,
         .form-textarea {
-            background: var(--color-bg-primary);
-            border: 1px solid var(--color-border);
-            border-radius: 8px;
-            padding: 1rem 1.25rem;
-            color: var(--color-text-primary);
-            font-family: var(--font-body);
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            outline: none;
             width: 100%;
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: 6px;
+            padding: 10px 12px;
+            color: var(--color-text);
+            font-size: 0.875rem;
+            outline: none;
+            font-family: var(--font-body);
         }
 
         .form-input:focus,
         .form-textarea:focus {
             border-color: var(--color-accent);
-            box-shadow: 0 0 0 3px rgba(201, 169, 98, 0.1);
+        }
+
+        .form-textarea {
+            min-height: 80px;
+            resize: vertical;
         }
 
         .form-input::placeholder,
@@ -614,76 +325,47 @@
             color: var(--color-text-muted);
         }
 
-        .form-textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        .error-message {
-            font-size: 0.75rem;
+        .error-msg {
+            font-size: 0.625rem;
             color: #E57373;
-            min-height: 1rem;
-            opacity: 0;
-            transition: opacity 0.2s ease;
+            margin-top: 2px;
+            display: none;
         }
 
-        .error-message.visible {
-            opacity: 1;
+        .error-msg.visible {
+            display: block;
         }
 
         .char-count {
-            font-size: 0.75rem;
+            font-size: 0.625rem;
             color: var(--color-text-muted);
             text-align: right;
+            margin-top: 2px;
         }
 
         .submit-btn {
-            margin-top: var(--space-sm);
-            padding: 1rem 2rem;
+            width: 100%;
+            padding: 12px;
             background: var(--color-accent);
             border: none;
-            border-radius: 8px;
-            color: var(--color-bg-primary);
-            font-family: var(--font-body);
-            font-size: 1rem;
+            border-radius: 6px;
+            color: var(--color-bg);
+            font-size: 0.875rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .submit-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .submit-btn:hover:not(:disabled)::before {
-            left: 100%;
-        }
-
-        .submit-btn:hover:not(:disabled) {
-            background: var(--color-accent-light);
-            transform: translateY(-2px);
+            margin-top: 8px;
         }
 
         .submit-btn:disabled {
             opacity: 0.6;
-            cursor: not-allowed;
         }
 
         .btn-loader {
             display: inline-block;
-            width: 16px;
-            height: 16px;
+            width: 14px;
+            height: 14px;
             border: 2px solid rgba(13, 13, 13, 0.2);
-            border-top-color: var(--color-bg-primary);
+            border-top-color: var(--color-bg);
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
         }
@@ -693,433 +375,214 @@
         }
 
         .form-status {
-            font-size: 0.875rem;
-            padding: 0.75rem 1rem;
-            border-radius: 8px;
-            opacity: 0;
-            transition: opacity 0.2s ease;
+            font-size: 0.75rem;
+            padding: 8px;
+            border-radius: 6px;
+            margin-top: 8px;
             text-align: center;
+            display: none;
         }
 
         .form-status.visible {
-            opacity: 1;
+            display: block;
         }
 
         .form-status.success {
             background: rgba(201, 169, 98, 0.1);
             color: var(--color-accent-light);
-            border: 1px solid var(--color-border-accent);
         }
 
         .form-status.error {
             background: rgba(229, 115, 115, 0.1);
             color: #E57373;
-            border: 1px solid rgba(229, 115, 115, 0.3);
         }
 
-        /* ================================
-           页脚
-           ================================ */
+        /* 页脚 */
         .footer {
-            padding: var(--space-xl) 0;
-            border-top: 1px solid var(--color-border);
+            padding: 20px 0;
             text-align: center;
-        }
-
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: var(--space-md);
+            border-top: 1px solid var(--color-border);
         }
 
         .footer-text {
-            font-size: 0.875rem;
+            font-size: 0.625rem;
             color: var(--color-text-muted);
-        }
-
-        .footer-links {
-            display: flex;
-            gap: var(--space-md);
         }
 
         .footer-link {
             color: var(--color-text-secondary);
             text-decoration: none;
-            font-size: 0.875rem;
-            transition: color 0.3s ease;
-        }
-
-        .footer-link:hover {
-            color: var(--color-accent);
-        }
-
-        /* ================================
-           动画
-           ================================ */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInRight {
-            from {
-                opacity: 0;
-                transform: translateX(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        /* ================================
-           响应式设计
-           ================================ */
-        @media (max-width: 968px) {
-            .hero-content {
-                grid-template-columns: 1fr;
-                gap: var(--space-xl);
-            }
-
-            .hero-visual {
-                order: -1;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .experience-timeline {
-                padding-left: var(--space-md);
-            }
-
-            .experience-item {
-                padding-left: var(--space-md);
-            }
-
-            .experience-item::before {
-                left: calc(-1 * var(--space-md) - 5px);
-            }
-        }
-
-        @media (max-width: 640px) {
-            .hero-stats {
-                flex-direction: column;
-                gap: var(--space-md);
-            }
-
-            .skills-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-content {
-                flex-direction: column;
-                text-align: center;
-            }
+            font-size: 0.75rem;
+            display: inline-block;
+            margin-top: 8px;
         }
     </style>
 </head>
 <body>
-    <!-- 背景装饰 -->
-    <div class="bg-pattern"></div>
-    <div class="bg-glow"></div>
-
-    <!-- 导航栏 -->
+    <!-- 导航 -->
     <nav class="nav">
-        <div class="nav-content">
-            <a href="#" class="nav-logo">田大树</a>
-            <ul class="nav-links">
-                <li><a href="#experience">职业经历</a></li>
-                <li><a href="#skills">核心能力</a></li>
-                <li><a href="#contact">联系我</a></li>
-            </ul>
+        <div class="nav-inner">
+            <span class="nav-logo">田大树</span>
+            <div class="nav-links">
+                <a href="#experience">经历</a>
+                <a href="#skills">能力</a>
+                <a href="#contact">联系</a>
+            </div>
         </div>
     </nav>
 
-    <!-- Hero 区域 -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <span class="hero-label">Product Manager</span>
-                    <h1 class="hero-name">田大树</h1>
-                    <p class="hero-title">产品经理 · 业务线负责人</p>
-                    <p class="hero-desc">
-                        10年+ 互联网产品经验，专注交易型产品、销售工具与 B2C 业务。
-                        从 0 到 1 搭建多业务线，带领团队达成业务目标。
-                    </p>
-                    <div class="hero-stats">
-                        <div class="stat-item">
-                            <div class="stat-number">10+</div>
-                            <div class="stat-label">年产品经验</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">4+</div>
-                            <div class="stat-label">年管理经验</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">17%</div>
-                            <div class="stat-label">转化率提升</div>
-                        </div>
+    <div class="container">
+        <!-- Hero -->
+        <section class="hero">
+            <span class="hero-label">PRODUCT MANAGER</span>
+            <h1 class="hero-name">田大树</h1>
+            <p class="hero-title">产品经理 · 业务线负责人</p>
+            <p class="hero-desc">10年+ 互联网产品经验，专注交易型产品、销售工具与 B2C 业务。从 0 到 1 搭建多业务线，带领团队达成业务目标。</p>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-num">10+</div>
+                    <div class="stat-label">年产品经验</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num">4+</div>
+                    <div class="stat-label">年管理经验</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num">17%</div>
+                    <div class="stat-label">转化率提升</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 职业经历 -->
+        <section id="experience" class="section">
+            <h2 class="section-title">职业经历</h2>
+
+            <!-- 车好多 -->
+            <div class="experience-item">
+                <div class="exp-header">
+                    <span class="exp-company">车好多集团</span>
+                    <span class="exp-period">2016.10 - 至今</span>
+                </div>
+                <div class="role-item">
+                    <div class="role-title">毛豆新车 · 销售产品线负责人</div>
+                    <div class="role-desc">为客户成交转化率负责。组建销售线产品团队，从0到1搭建客户成交业务流程。</div>
+                    <div class="role-highlights">
+                        <span class="highlight">转化率提升17%</span>
+                        <span class="highlight">金融进件率+50%</span>
                     </div>
                 </div>
-                <div class="hero-visual">
-                    <div class="hero-card">
-                        <h3 class="hero-card-title">核心能力</h3>
-                        <div class="skill-tags">
-                            <span class="skill-tag">产品设计</span>
-                            <span class="skill-tag">业务搭建</span>
-                            <span class="skill-tag">团队管理</span>
-                            <span class="skill-tag">销售工具</span>
-                            <span class="skill-tag">CRM系统</span>
-                            <span class="skill-tag">客户流转</span>
-                            <span class="skill-tag">转化率优化</span>
-                            <span class="skill-tag">跨部门协作</span>
-                            <span class="skill-tag">新业务探索</span>
-                        </div>
+                <div class="role-item">
+                    <div class="role-title">毛豆新车 · 车主服务负责人</div>
+                    <div class="role-desc">为车主服务体验及资产保全负责。搭建客户服务流程与资产保全系统。</div>
+                    <div class="role-highlights">
+                        <span class="highlight">客诉率 18%→9%</span>
+                    </div>
+                </div>
+                <div class="role-item">
+                    <div class="role-title">瓜子二手车 C2B · 产品负责人</div>
+                    <div class="role-desc">为车源成交转化率负责。重构车源曝光策略，构建两类购车流程。</div>
+                    <div class="role-highlights">
+                        <span class="highlight">转化率+10%</span>
+                        <span class="highlight">人效提升2倍</span>
+                        <span class="highlight">最佳产品团队</span>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- 职业经历 -->
-    <section id="experience">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-number">01</div>
-                <h2 class="section-title">职业经历</h2>
-                <p class="section-subtitle">从 0 到 1 的业务探索与管理成长</p>
-            </div>
-
-            <div class="experience-timeline">
-                <!-- 车好多集团 -->
-                <div class="experience-item">
-                    <div class="experience-header">
-                        <h3 class="experience-company">车好多集团</h3>
-                        <span class="experience-period">2016.10 - 至今</span>
-                    </div>
-                    <div class="experience-roles">
-                        <div class="role-card">
-                            <div class="role-header">
-                                <h4 class="role-title">毛豆新车 · 销售产品线负责人</h4>
-                                <span class="role-team">直接汇报下属 5 人</span>
-                            </div>
-                            <p class="role-desc">
-                                为客户成交转化率负责。2017年接手毛豆新车交易链条，组建销售线产品经理团队，
-                                从 0 到 1 搭建客户成交业务流程，协同配合团队达成 2017、2018 年全年销售目标。
-                            </p>
-                            <div class="role-highlights">
-                                <span class="highlight-item">客户转化率提升 17%</span>
-                                <span class="highlight-item">金融进件率提升 50%</span>
-                                <span class="highlight-item">NPS 从 -36% 提升至 22%</span>
-                            </div>
-                        </div>
-                        <div class="role-card">
-                            <div class="role-header">
-                                <h4 class="role-title">毛豆新车 · 车主服务负责人</h4>
-                                <span class="role-team">直接汇报下属 3 人</span>
-                            </div>
-                            <p class="role-desc">
-                                为车主服务体验及公司资产保全负责。2019年接手，组建产品经理团队，
-                                从 0 到 1 搭建客户服务流程与资产保全产品支撑系统。
-                            </p>
-                            <div class="role-highlights">
-                                <span class="highlight-item">客诉率从 18% 降至 9%</span>
-                                <span class="highlight-item">资产保全系统初步建立</span>
-                            </div>
-                        </div>
-                        <div class="role-card">
-                            <div class="role-header">
-                                <h4 class="role-title">瓜子二手车 C2B · 产品负责人</h4>
-                                <span class="role-team">直接汇报下属 4 人</span>
-                            </div>
-                            <p class="role-desc">
-                                为车源成交转化率负责。重构车源曝光策略，构建异地、固定点两类购车流程，
-                                荣获公司最佳产品团队称号。
-                            </p>
-                            <div class="role-highlights">
-                                <span class="highlight-item">转化率增长 10%</span>
-                                <span class="highlight-item">销售人效提升 2 倍</span>
-                                <span class="highlight-item">销售线索覆盖率 86%→99%</span>
-                            </div>
-                        </div>
+            <!-- 美团 -->
+            <div class="experience-item">
+                <div class="exp-header">
+                    <span class="exp-company">美团点评集团</span>
+                    <span class="exp-period">2015.01 - 2016.10</span>
+                </div>
+                <div class="role-item">
+                    <div class="role-title">美团外卖 · 鲜果业务产品负责人</div>
+                    <div class="role-desc">为品牌商户水果售卖线上化负责。负责商务合作、项目推进、门店经营。</div>
+                    <div class="role-highlights">
+                        <span class="highlight">36家线上门店</span>
+                        <span class="highlight">GMV占比30%</span>
                     </div>
                 </div>
-
-                <!-- 美团点评集团 -->
-                <div class="experience-item">
-                    <div class="experience-header">
-                        <h3 class="experience-company">美团点评集团</h3>
-                        <span class="experience-period">2015.01 - 2016.10</span>
-                    </div>
-                    <div class="experience-roles">
-                        <div class="role-card">
-                            <div class="role-header">
-                                <h4 class="role-title">美团外卖 · 鲜果业务产品负责人</h4>
-                                <span class="role-team">虚拟小组 8 人</span>
-                            </div>
-                            <p class="role-desc">
-                                为品牌商户水果售卖线上化项目负责。负责商务合作、项目推进、门店经营、关系维护，
-                                顺利达成传统水果企业和互联网企业的战略合作。
-                            </p>
-                            <div class="role-highlights">
-                                <span class="highlight-item">负责深圳线上门店 36 家</span>
-                                <span class="highlight-item">线上渠道占线下 GMV 30%</span>
-                                <span class="highlight-item">百果园门店客单价 50 元</span>
-                            </div>
-                        </div>
-                        <div class="role-card">
-                            <div class="role-header">
-                                <h4 class="role-title">美团早餐 · 产品经理</h4>
-                                <span class="role-team">履约产品组</span>
-                            </div>
-                            <p class="role-desc">
-                                负责早餐履约配送端，为履约配送准点率负责。参与城市拓展的产品方案设计。
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 搜狐集团 -->
-                <div class="experience-item">
-                    <div class="experience-header">
-                        <h3 class="experience-company">搜狐集团</h3>
-                        <span class="experience-period">2012.03 - 2014.12</span>
-                    </div>
-                    <div class="experience-roles">
-                        <div class="role-card">
-                            <div class="role-header">
-                                <h4 class="role-title">搜狐快站 · 产品经理</h4>
-                            </div>
-                            <p class="role-desc">
-                                参与移动建站产品设计，服务中小企业建站需求。
-                            </p>
-                        </div>
-                        <div class="role-card">
-                            <div class="role-header">
-                                <h4 class="role-title">搜狐网 · 产品运营</h4>
-                            </div>
-                            <p class="role-desc">
-                                负责频道运营数据分析和产品优化，积累互联网产品基础能力。
-                            </p>
-                        </div>
-                    </div>
+                <div class="role-item">
+                    <div class="role-title">美团早餐 · 产品经理</div>
+                    <div class="role-desc">负责早餐履约配送端，为配送准点率负责。</div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- 核心能力 -->
-    <section id="skills">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-number">02</div>
-                <h2 class="section-title">核心能力</h2>
-                <p class="section-subtitle">多年实战沉淀的专业能力</p>
+            <!-- 搜狐 -->
+            <div class="experience-item">
+                <div class="exp-header">
+                    <span class="exp-company">搜狐集团</span>
+                    <span class="exp-period">2012.03 - 2014.12</span>
+                </div>
+                <div class="role-item">
+                    <div class="role-title">搜狐快站 · 产品经理</div>
+                    <div class="role-desc">参与移动建站产品设计，服务中小企业建站需求。</div>
+                </div>
+                <div class="role-item">
+                    <div class="role-title">搜狐网 · 产品运营</div>
+                    <div class="role-desc">负责频道运营数据分析和产品优化。</div>
+                </div>
             </div>
+        </section>
 
+        <!-- 核心能力 -->
+        <section id="skills" class="section">
+            <h2 class="section-title">核心能力</h2>
             <div class="skills-grid">
-                <div class="skill-card">
+                <div class="skill-item">
                     <div class="skill-icon">🎯</div>
-                    <h3 class="skill-card-title">产品策略</h3>
-                    <p class="skill-card-desc">从 0 到 1 搭建业务线，制定产品规划，推动业务目标达成</p>
+                    <div class="skill-name">产品策略</div>
                 </div>
-                <div class="skill-card">
+                <div class="skill-item">
                     <div class="skill-icon">👥</div>
-                    <h3 class="skill-card-title">团队管理</h3>
-                    <p class="skill-card-desc">4年+ 管理经验，带领产品团队完成多个重点项目</p>
+                    <div class="skill-name">团队管理</div>
                 </div>
-                <div class="skill-card">
+                <div class="skill-item">
                     <div class="skill-icon">📈</div>
-                    <h3 class="skill-card-title">数据驱动</h3>
-                    <p class="skill-card-desc">通过数据分析优化产品，实现转化率、效率等核心指标提升</p>
+                    <div class="skill-name">数据驱动</div>
                 </div>
-                <div class="skill-card">
+                <div class="skill-item">
                     <div class="skill-icon">🔗</div>
-                    <h3 class="skill-card-title">跨部门协作</h3>
-                    <p class="skill-card-desc">协调研发、运营、商务等多部门，推动项目落地</p>
+                    <div class="skill-name">跨部门协作</div>
                 </div>
-                <div class="skill-card">
+                <div class="skill-item">
                     <div class="skill-icon">🛠️</div>
-                    <h3 class="skill-card-title">销售工具</h3>
-                    <p class="skill-card-desc">深谙 CRM、销售作业系统设计，提升销售团队效率</p>
+                    <div class="skill-name">销售工具</div>
                 </div>
-                <div class="skill-card">
+                <div class="skill-item">
                     <div class="skill-icon">🚀</div>
-                    <h3 class="skill-card-title">新业务探索</h3>
-                    <p class="skill-card-desc">具备敏锐的商业嗅觉，擅长从 0 到 1 的业务创新</p>
+                    <div class="skill-name">业务创新</div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
     <!-- 联系表单 -->
     <section id="contact" class="contact-section">
-        <div class="contact-content">
-            <div class="section-header" style="text-align: center;">
-                <div class="section-number">03</div>
-                <h2 class="section-title">联系我</h2>
-                <p class="section-subtitle">期待与您的交流</p>
-            </div>
-
-            <form id="contact-form" class="contact-form" novalidate>
+        <div class="container">
+            <h2 class="section-title">联系我</h2>
+            <form id="contact-form">
                 <div class="form-group">
-                    <label for="email" class="form-label">邮箱</label>
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        class="form-input"
-                        placeholder="your@email.com"
-                        required
-                        autocomplete="email"
-                    >
-                    <span class="error-message" id="email-error"></span>
+                    <label class="form-label">邮箱</label>
+                    <input type="email" id="email" class="form-input" placeholder="your@email.com" required autocomplete="email">
+                    <span class="error-msg" id="email-error"></span>
                 </div>
-
                 <div class="form-group">
-                    <label for="name" class="form-label">称呼</label>
-                    <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        class="form-input"
-                        placeholder="怎么称呼您"
-                        maxlength="20"
-                        required
-                        autocomplete="name"
-                    >
-                    <span class="error-message" id="name-error"></span>
-                    <span class="char-count"><span id="char-count">0</span>/20</span>
+                    <label class="form-label">称呼</label>
+                    <input type="text" id="name" class="form-input" placeholder="怎么称呼您" maxlength="20" required autocomplete="name">
+                    <span class="error-msg" id="name-error"></span>
+                    <div class="char-count"><span id="char-count">0</span>/20</div>
                 </div>
-
                 <div class="form-group">
-                    <label for="message" class="form-label">留言</label>
-                    <textarea
-                        id="message"
-                        name="message"
-                        class="form-textarea"
-                        rows="4"
-                        placeholder="想说点什么..."
-                        maxlength="500"
-                    ></textarea>
-                    <span class="error-message" id="message-error"></span>
+                    <label class="form-label">留言</label>
+                    <textarea id="message" class="form-textarea" placeholder="想说点什么..." maxlength="500"></textarea>
                 </div>
-
                 <button type="submit" class="submit-btn" id="submit-btn">
                     <span class="btn-text">发送消息</span>
-                    <span class="btn-loader" style="display: none;"></span>
+                    <span class="btn-loader" style="display:none;"></span>
                 </button>
-
                 <div id="form-status" class="form-status"></div>
             </form>
         </div>
@@ -1128,154 +591,110 @@
     <!-- 页脚 -->
     <footer class="footer">
         <div class="container">
-            <div class="footer-content">
-                <p class="footer-text">© 2026 田大树 · 保留所有权利</p>
-                <div class="footer-links">
-                    <a href="https://x.com/more_than7" target="_blank" class="footer-link">X @more_than7</a>
-                </div>
-            </div>
+            <p class="footer-text">© 2026 田大树</p>
+            <a href="https://x.com/more_than7" target="_blank" class="footer-link">@more_than7</a>
         </div>
     </footer>
 
     <script>
-        // ================================
-        // 联系表单逻辑
-        // ================================
         (function() {
             const form = document.getElementById('contact-form');
             const submitBtn = document.getElementById('submit-btn');
             const btnText = submitBtn.querySelector('.btn-text');
             const btnLoader = submitBtn.querySelector('.btn-loader');
             const formStatus = document.getElementById('form-status');
-
             const emailInput = document.getElementById('email');
             const nameInput = document.getElementById('name');
             const messageInput = document.getElementById('message');
             const charCount = document.getElementById('char-count');
-
             const emailError = document.getElementById('email-error');
             const nameError = document.getElementById('name-error');
-            const messageError = document.getElementById('message-error');
 
             const API_ENDPOINT = '/api/contact';
 
             function isValidEmail(email) {
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                return emailRegex.test(email);
+                return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
             }
 
-            function showError(element, message) {
-                element.textContent = message;
-                element.classList.add('visible');
+            function showError(el, msg) {
+                el.textContent = msg;
+                el.classList.add('visible');
             }
 
-            function hideError(element) {
-                element.textContent = '';
-                element.classList.remove('visible');
+            function hideError(el) {
+                el.textContent = '';
+                el.classList.remove('visible');
             }
 
-            function showStatus(message, type) {
-                formStatus.textContent = message;
-                formStatus.className = `form-status visible ${type}`;
+            function setStatus(msg, type) {
+                formStatus.textContent = msg;
+                formStatus.className = 'form-status visible ' + type;
             }
 
-            function setSubmitting(isSubmitting) {
-                submitBtn.disabled = isSubmitting;
-                if (isSubmitting) {
-                    btnText.style.display = 'none';
-                    btnLoader.style.display = 'inline-block';
-                } else {
-                    btnText.style.display = 'inline';
-                    btnLoader.style.display = 'none';
-                }
+            function setLoading(loading) {
+                submitBtn.disabled = loading;
+                btnText.style.display = loading ? 'none' : 'inline';
+                btnLoader.style.display = loading ? 'inline-block' : 'none';
             }
 
             nameInput.addEventListener('input', function() {
-                const length = this.value.length;
-                charCount.textContent = length;
-                charCount.style.color = length >= 20 ? '#E57373' : '';
+                charCount.textContent = this.value.length;
+                charCount.style.color = this.value.length >= 20 ? '#E57373' : '';
+                hideError(nameError);
             });
 
             emailInput.addEventListener('input', () => hideError(emailError));
-            nameInput.addEventListener('input', () => hideError(nameError));
-            messageInput.addEventListener('input', () => hideError(messageError));
 
             form.addEventListener('submit', async function(e) {
                 e.preventDefault();
-
                 let hasError = false;
 
                 if (!emailInput.value.trim()) {
-                    showError(emailError, '请输入邮箱地址');
+                    showError(emailError, '请输入邮箱');
                     hasError = true;
                 } else if (!isValidEmail(emailInput.value.trim())) {
-                    showError(emailError, '请输入有效的邮箱地址');
+                    showError(emailError, '邮箱格式不正确');
                     hasError = true;
                 }
 
                 if (!nameInput.value.trim()) {
-                    showError(nameError, '请输入您的称呼');
-                    hasError = true;
-                } else if (nameInput.value.trim().length > 20) {
-                    showError(nameError, '称呼不能超过20个字符');
+                    showError(nameError, '请输入称呼');
                     hasError = true;
                 }
 
                 if (hasError) return;
 
-                setSubmitting(true);
-
-                const formData = {
-                    email: emailInput.value.trim(),
-                    name: nameInput.value.trim(),
-                    message: messageInput.value.trim() || ''
-                };
+                setLoading(true);
 
                 try {
-                    const response = await fetch(API_ENDPOINT, {
+                    const res = await fetch(API_ENDPOINT, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(formData)
+                        body: JSON.stringify({
+                            email: emailInput.value.trim(),
+                            name: nameInput.value.trim(),
+                            message: messageInput.value.trim() || ''
+                        })
                     });
-
-                    const result = await response.json();
+                    const result = await res.json();
 
                     if (result.success) {
-                        showStatus('发送成功，感谢您的留言！', 'success');
+                        setStatus('发送成功！', 'success');
                         form.reset();
                         charCount.textContent = '0';
                     } else {
-                        if (result.errors && result.errors.length > 0) {
-                            result.errors.forEach(err => {
-                                if (err.includes('邮箱')) showError(emailError, err);
-                                else if (err.includes('称呼')) showError(nameError, err);
-                                else showStatus(err, 'error');
-                            });
-                        } else {
-                            showStatus(result.error || '发送失败，请稍后重试', 'error');
-                        }
+                        setStatus(result.error || '发送失败', 'error');
                     }
-                } catch (error) {
-                    console.error('Form submission error:', error);
-                    showStatus('网络错误，请稍后重试', 'error');
+                } catch (err) {
+                    setStatus('网络错误，请重试', 'error');
                 } finally {
-                    setSubmitting(false);
-                }
-            });
-
-            // 导航栏滚动效果
-            const nav = document.querySelector('.nav');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    nav.style.background = 'rgba(13, 13, 13, 0.95)';
-                } else {
-                    nav.style.background = 'rgba(13, 13, 13, 0.8)';
+                    setLoading(false);
                 }
             });
 
             // 平滑滚动
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
+            document.querySelectorAll('a[href^="#"]').forEach(a => {
+                a.addEventListener('click', function(e) {
                     e.preventDefault();
                     const target = document.querySelector(this.getAttribute('href'));
                     if (target) {
